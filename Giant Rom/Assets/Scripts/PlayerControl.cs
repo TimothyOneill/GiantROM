@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerControl : MonoBehaviour {
+public class PlayerControl : MonoBehaviour
+{
     Rigidbody2D rigidbody2D;
     bool facingRight = true;
     public float maxSpeed;
@@ -21,7 +22,6 @@ public class PlayerControl : MonoBehaviour {
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
     }
 
     // Update is called once per frame
