@@ -14,14 +14,23 @@ public class PlayerControl : MonoBehaviour
     float groundRadius = 0.4f;
     public LayerMask whatIsGround;
 
-    public AudioClip[] audio;
+    public AudioClip[] audioFiles;
+    public Camera mainCamera;
 
+    private AudioSource source;
+    private bool resetCamera;
+    private Vector3 cameraDefaultPos;
+    private float cameraDefaultSize;
 
     // Use this for initialization
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
+
+        cameraDefaultPos = mainCamera.transform.position;
+        cameraDefaultSize = mainCamera.orthographicSize;
     }
 
     // Update is called once per frame
@@ -30,9 +39,11 @@ public class PlayerControl : MonoBehaviour
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
         anim.SetBool("Ground", grounded);
         anim.SetFloat("vSpeed", rigidbody2D.velocity.y);
-
-
-        float move = Input.GetAxis("Horizontal");
+        float move = 0.0f;
+        if (mainCamera.orthographicSize > 1.2f)
+        {
+            move = Input.GetAxis("Horizontal");
+        }
         rigidbody2D.velocity = new Vector2(move * maxSpeed, rigidbody2D.velocity.y);
         anim.SetFloat("hSpeed", Mathf.Abs(move));
 
@@ -52,6 +63,12 @@ public class PlayerControl : MonoBehaviour
         {
             Jump();
         }
+
+        if (Input.GetKeyUp(KeyCode.Alpha4) && !resetCamera)
+        {
+            resetCamera = true;
+            StartCoroutine(ZoomInCamera(audioFiles[0], 0.75f, 2.0f));
+        }
     }
 
     //Flips the character to face the correct direction
@@ -68,5 +85,30 @@ public class PlayerControl : MonoBehaviour
     {
         anim.SetBool("Ground", false);
         rigidbody2D.AddForce(new Vector2(0, jumpForce));
+    }
+
+    private IEnumerator ZoomInCamera(AudioClip audioClip, float zoom, float speed)
+    {
+        while (mainCamera.orthographicSize > zoom)
+        {
+            mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, this.transform.position + new Vector3(0.0f, 0.0f, -0.3f), Time.deltaTime * speed);
+            mainCamera.orthographicSize = Mathf.Lerp(mainCamera.orthographicSize, zoom-0.05f, Time.deltaTime * speed);
+            yield return null;
+        }
+        if (!source.isPlaying)
+        {
+            source.PlayOneShot(audioClip, 1);
+        }
+        //comedic timing.
+        yield return new WaitForSeconds(audioClip.length + 0.5f);
+
+        while (mainCamera.orthographicSize < cameraDefaultSize)
+        {
+            mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, cameraDefaultPos, Time.deltaTime * speed);
+            mainCamera.orthographicSize = Mathf.Lerp(mainCamera.orthographicSize, cameraDefaultSize + 0.05f, Time.deltaTime * speed);
+            yield return null;
+        }
+        resetCamera = false;
+        print("method exited cleanly");
     }
 }
