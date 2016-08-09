@@ -5,17 +5,16 @@ using UnityEngine.UI;
 public class StatBar : MonoBehaviour {
 
     public Image content;
-    private float fillAmount = 0;
-    bool hack = false;
+    private float fillAmount = 0.0f;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
-	
-	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         UpdateBar();
     }
@@ -34,27 +33,16 @@ public class StatBar : MonoBehaviour {
         {
             content.color = new Color32(6, 201, 31, 255);
         }
-
-        if (content.fillAmount > 0.0f && hack == false)
-        {
-            content.fillAmount += fillAmount;
-        }
-        else
-        {
-            hack = true;
-        }
-        if (content.fillAmount < 100.0f && hack == true)
-        {
-            content.fillAmount = Mathf.Lerp(content.fillAmount, 100.0f, Time.deltaTime * fillAmount);
-        }
-        else
-        {
-            hack = false;
-        }
+        content.fillAmount += fillAmount;
     }
 
     public void ChangeBar(float _fillAmount)
     {
         fillAmount = _fillAmount;
+    }
+
+    public void TempChangeBar(float _fillAmount)
+    {
+        content.fillAmount += _fillAmount;
     }
 }

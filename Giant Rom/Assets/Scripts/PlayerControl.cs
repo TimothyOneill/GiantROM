@@ -19,8 +19,7 @@ public class PlayerControl : MonoBehaviour
 
     private AudioSource source;
     private bool resetCamera;
-    private Vector3 cameraDefaultPos;
-    private float cameraDefaultSize;
+
 
     // Use this for initialization
     void Start()
@@ -28,9 +27,6 @@ public class PlayerControl : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
-
-        cameraDefaultPos = mainCamera.transform.position;
-        cameraDefaultSize = mainCamera.orthographicSize;
     }
 
     // Update is called once per frame
@@ -89,6 +85,9 @@ public class PlayerControl : MonoBehaviour
 
     private IEnumerator ZoomInCamera(AudioClip audioClip, float zoom, float speed)
     {
+        Vector3 cameraDefaultPos = mainCamera.transform.position;
+        float cameraDefaultSize = mainCamera.orthographicSize;
+
         while (mainCamera.orthographicSize > zoom)
         {
             mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, this.transform.position + new Vector3(0.0f, 0.0f, -0.3f), Time.deltaTime * speed);
@@ -101,7 +100,7 @@ public class PlayerControl : MonoBehaviour
         }
         //comedic timing.
         yield return new WaitForSeconds(audioClip.length + 0.5f);
-        GameManager.gameManager.SetDemonstration(4);
+        GameManager.gameManager.SetDemonstration(3);
 
         while (mainCamera.orthographicSize < cameraDefaultSize)
         {
@@ -110,8 +109,5 @@ public class PlayerControl : MonoBehaviour
             yield return null;
         }
         resetCamera = false;
-
-        
-        print("method exited cleanly");
     }
 }

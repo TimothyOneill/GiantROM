@@ -4,40 +4,38 @@ using System.Collections;
 public class Spotlight : MonoBehaviour
 {
     Light lightObject;
-    public Vector3 target;
+    private Vector3 target;
     public float speed = 0.05f;
-
-    private Vector3 direction;
 
     // Use this for initialization
     void Start ()
     {
         lightObject = GetComponent<Light>();
-        direction = lightObject.transform.position - target;
+        target = lightObject.transform.position;
     }
 
     // Update is called once per frame
     void Update ()
     {
-        if (!ReachedTarget(lightObject.transform.position, target, speed))
-        {
-            Vector3 nextLocation = lightObject.transform.position - (direction * speed * Time.deltaTime);
-            lightObject.transform.position = nextLocation;
-        }
+        lightObject.transform.position = Vector3.Lerp(lightObject.transform.position, target, Time.deltaTime * speed);
     }
 
-    bool ReachedTarget(Vector3 a, Vector3 b, float precision)
+    public bool ReachedTarget()
     {
-        return Vector3.SqrMagnitude(a - b) < precision;
+        return Vector3.SqrMagnitude(lightObject.transform.position - target) < 0.01f;
     }
 
-    void SetTarget(Vector3 _target)
+    public bool InSpotLight(Vector3 _in)
+    {
+        return Mathf.Abs(lightObject.transform.position.x - _in.x) < 1.5f;
+    }
+
+    public void SetTarget(Vector3 _target)
     {
         target = _target;
-        direction = lightObject.transform.position - target;
     }
 
-    void SetSpeed(float _speed)
+    public void SetSpeed(float _speed)
     {
         speed = _speed;
     }

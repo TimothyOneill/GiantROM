@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager gameManager; //Reference to the Game Manager.
     public Spectator[] spectators;
+    public Spotlight spotlight;
     public Text theme;
 
     void Awake()
@@ -34,17 +35,33 @@ public class GameManager : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SetDemonstration(1);
+            SetDemonstration(0);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            SetDemonstration(2);
+            SetDemonstration(1);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            SetDemonstration(3);
+            SetDemonstration(2);
+        }
+
+        //Set new target for spotlight
+        if (spotlight.ReachedTarget())
+        {
+            spotlight.SetTarget(new Vector3(Random.Range(-10, 10),spotlight.transform.position.y,spotlight.transform.position.z));
+            spotlight.SetSpeed(Random.Range(0.1f, 0.9f));
+        }
+
+        //Check if the player is in the spotlight if not drop approval.
+        if (!spotlight.InSpotLight(GameObject.Find("Dan").transform.position))
+        {
+            foreach (Spectator s in spectators)
+            {
+                s.CantSee();
+            }
         }
     }
 
@@ -56,6 +73,4 @@ public class GameManager : MonoBehaviour {
         }
         theme.text = "Theme " + _demonstration.ToString();
     }
-
-
 }
