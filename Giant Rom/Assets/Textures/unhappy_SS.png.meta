@@ -52,14 +52,11 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
-  spriteTessellationDetail: -1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    serializedVersion: 2
     sprites:
-    - serializedVersion: 2
-      name: unhappy_SS_0
+    - name: unhappy_SS_0
       rect:
         serializedVersion: 2
         x: 0
@@ -69,10 +66,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: unhappy_SS_1
+      outline:
+      - - {x: 8, y: 16}
+        - {x: -7, y: 16}
+        - {x: -16, y: 12}
+        - {x: -16, y: -12}
+        - {x: -9, y: -16}
+        - {x: 10, y: -16}
+        - {x: 16, y: -8}
+        - {x: 16, y: 10}
+    - name: unhappy_SS_1
       rect:
         serializedVersion: 2
         x: 33
@@ -82,10 +85,17 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: unhappy_SS_2
+      outline:
+      - - {x: -11, y: 15}
+        - {x: -16, y: 12}
+        - {x: -16, y: -13}
+        - {x: -15, y: -15}
+        - {x: -9, y: -16}
+        - {x: 8, y: -16}
+        - {x: 13, y: -14}
+        - {x: 13, y: 9}
+        - {x: 11, y: 15}
+    - name: unhappy_SS_2
       rect:
         serializedVersion: 2
         x: 66
@@ -95,10 +105,17 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: unhappy_SS_3
+      outline:
+      - - {x: -11, y: 15}
+        - {x: -15, y: 14}
+        - {x: -15, y: -11}
+        - {x: -13, y: -15}
+        - {x: -11, y: -16}
+        - {x: 13, y: -16}
+        - {x: 15, y: -10}
+        - {x: 15, y: 14}
+        - {x: 14, y: 15}
+    - name: unhappy_SS_3
       rect:
         serializedVersion: 2
         x: 99
@@ -108,10 +125,15 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: unhappy_SS_4
+      outline:
+      - - {x: -11, y: 16}
+        - {x: -13, y: 13}
+        - {x: -15, y: 3}
+        - {x: -15, y: -16}
+        - {x: 16, y: -16}
+        - {x: 16, y: 13}
+        - {x: 10, y: 16}
+    - name: unhappy_SS_4
       rect:
         serializedVersion: 2
         x: 132
@@ -121,10 +143,17 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: unhappy_SS_5
+      outline:
+      - - {x: -11, y: 15}
+        - {x: -16, y: 12}
+        - {x: -16, y: -13}
+        - {x: -15, y: -15}
+        - {x: -9, y: -16}
+        - {x: 8, y: -16}
+        - {x: 13, y: -14}
+        - {x: 13, y: 9}
+        - {x: 11, y: 15}
+    - name: unhappy_SS_5
       rect:
         serializedVersion: 2
         x: 165
@@ -134,8 +163,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
+      outline:
+      - - {x: -11, y: 15}
+        - {x: -16, y: 12}
+        - {x: -16, y: -13}
+        - {x: -15, y: -15}
+        - {x: -9, y: -16}
+        - {x: 8, y: -16}
+        - {x: 13, y: -14}
+        - {x: 13, y: 9}
+        - {x: 11, y: 15}
     outline: []
   spritePackingTag: 
   userData: 

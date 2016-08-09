@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class StatBar : MonoBehaviour {
 
     public Image content;
-    private float fillAmount = 0.005f;
+    private float fillAmount = 0;
     bool hack = false;
 
 	// Use this for initialization
@@ -37,7 +37,7 @@ public class StatBar : MonoBehaviour {
 
         if (content.fillAmount > 0.0f && hack == false)
         {
-            content.fillAmount -= 0.005f;
+            content.fillAmount += fillAmount;
         }
         else
         {
@@ -51,5 +51,10 @@ public class StatBar : MonoBehaviour {
         {
             hack = false;
         }
+    }
+
+    public void ChangeBar(float _fillAmount)
+    {
+        fillAmount = _fillAmount;
     }
 }

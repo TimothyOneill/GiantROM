@@ -101,6 +101,7 @@ public class PlayerControl : MonoBehaviour
         }
         //comedic timing.
         yield return new WaitForSeconds(audioClip.length + 0.5f);
+        GameManager.gameManager.SetDemonstration(4);
 
         while (mainCamera.orthographicSize < cameraDefaultSize)
         {
@@ -109,6 +110,8 @@ public class PlayerControl : MonoBehaviour
             yield return null;
         }
         resetCamera = false;
+
+        
         print("method exited cleanly");
     }
 }
