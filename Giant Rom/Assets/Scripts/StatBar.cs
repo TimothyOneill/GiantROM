@@ -10,11 +10,11 @@ public class StatBar : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-
-    }
-
+        content.fillAmount = 0.5f;
+	}
     // Update is called once per frame
     void Update ()
+
     {
         UpdateBar();
     }
