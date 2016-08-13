@@ -26,15 +26,15 @@ public class StatBar : MonoBehaviour {
     {
         if (content.fillAmount < 0.5f && content.fillAmount >= 0.2f)
         {
-            content.color = fillColour1; //new Color32(247, 166, 35, 255);
+            content.color = fillColour1;
         }
         else if (content.fillAmount < 0.2f)
         {
-            content.color = fillColour2; //new Color32(227, 41, 41, 255);
+            content.color = fillColour2;
         }
         else
         {
-            content.color = defaultColour; //new Color32(6, 201, 31, 255);
+            content.color = defaultColour;
         }
         content.fillAmount += fillAmount;
     }
