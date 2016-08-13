@@ -5,7 +5,7 @@ public class EndManager : MonoBehaviour {
 
 
    public AudioClip[] audio;
-    public AudioSource source;
+   public AudioSource source;
 
 
 	// Use this for initialization
