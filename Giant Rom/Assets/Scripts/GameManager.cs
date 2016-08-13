@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
@@ -7,7 +6,6 @@ public class GameManager : MonoBehaviour {
     public static GameManager gameManager; //Reference to the Game Manager.
     public Spectator[] spectators;
     public Spotlight spotlight;
-    public Text theme;
     public Screen screen;
 
     void Awake()
@@ -28,28 +26,28 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-	
-	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             SetDemonstration(0);
-            screen.ChangeScreen("Assets/Textures/roman_reigns.jpg", "Materials/roman_reigns");
+            screen.ChangeScreen("Wrasslin", "Assets/Textures/roman_reigns.jpg", "Materials/roman_reigns");
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             SetDemonstration(1);
-            screen.ChangeScreen("Assets/Textures/jeff_gerst.jpg", "Materials/jeff_gerst");
+            screen.ChangeScreen("Jeff Gerstmann", "Assets/Textures/jeff_gerst.jpg", "Materials/jeff_gerst");
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             SetDemonstration(2);
-            screen.ChangeScreen("Assets/Textures/mario_party.jpg", "Materials/mario_party");
+            screen.ChangeScreen("Mario Party", "Assets/Textures/mario_party.jpg", "Materials/mario_party");
         }
 
         //Set new target for spotlight
@@ -75,6 +73,5 @@ public class GameManager : MonoBehaviour {
         {
             s.Feelings(_demonstration);
         }
-        theme.text = "Theme " + _demonstration.ToString();
     }
 }

@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Screen : MonoBehaviour
 {
-	// Use this for initialization
-	void Start ()
+    public Text theme;
+
+    // Use this for initialization
+    void Start ()
     {
 	}
 	
@@ -13,7 +16,7 @@ public class Screen : MonoBehaviour
     {
     }
 
-    public bool ChangeScreen(string texfilePath, string matfilePath)
+    public bool ChangeScreen(string themeText, string texfilePath, string matfilePath)
     {
         if (System.IO.File.Exists(texfilePath))
         {
@@ -26,6 +29,8 @@ public class Screen : MonoBehaviour
 
             MeshRenderer mr = this.gameObject.GetComponent<MeshRenderer>();
             mr.material = newMat;
+
+            theme.text = themeText;
             return true;
         }
         return false;

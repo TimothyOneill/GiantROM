@@ -19,7 +19,7 @@ public class PlayerControl : MonoBehaviour
 
     private AudioSource source;
     private bool resetCamera;
-
+    public StatBar powerBar;
 
     // Use this for initialization
     void Start()
@@ -27,6 +27,7 @@ public class PlayerControl : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
+        powerBar.ChangeBar(0.0005f);
     }
 
     // Update is called once per frame
@@ -60,7 +61,7 @@ public class PlayerControl : MonoBehaviour
             Jump();
         }
 
-        if (Input.GetKeyUp(KeyCode.Alpha4) && !resetCamera)
+        if (powerBar.GetFillamount() == 1.0f && Input.GetKeyUp(KeyCode.Alpha4) && !resetCamera)
         {
             resetCamera = true;
             StartCoroutine(ZoomInCamera(audioFiles[0], 0.75f, 2.0f));
@@ -108,6 +109,7 @@ public class PlayerControl : MonoBehaviour
             mainCamera.orthographicSize = Mathf.Lerp(mainCamera.orthographicSize, cameraDefaultSize + 0.05f, Time.deltaTime * speed);
             yield return null;
         }
+        powerBar.SetFillAmount(0.0f);
         resetCamera = false;
     }
 }
