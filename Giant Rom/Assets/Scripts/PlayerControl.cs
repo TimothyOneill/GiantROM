@@ -20,6 +20,7 @@ public class PlayerControl : MonoBehaviour
     private AudioSource source;
     private bool resetCamera;
     public StatBar powerBar;
+    public GameObject playerHUD;
 
     // Use this for initialization
     void Start()
@@ -88,6 +89,7 @@ public class PlayerControl : MonoBehaviour
     {
         Vector3 cameraDefaultPos = mainCamera.transform.position;
         float cameraDefaultSize = mainCamera.orthographicSize;
+        playerHUD.SetActive(false);
 
         while (mainCamera.orthographicSize > zoom)
         {
@@ -102,7 +104,7 @@ public class PlayerControl : MonoBehaviour
         //comedic timing.
         yield return new WaitForSeconds(audioClip.length + 0.5f);
         GameManager.gameManager.SetDemonstration(3);
-
+        playerHUD.SetActive(true);
         while (mainCamera.orthographicSize < cameraDefaultSize)
         {
             mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, cameraDefaultPos, Time.deltaTime * speed);
