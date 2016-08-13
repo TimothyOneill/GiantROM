@@ -18,6 +18,4 @@ public class EndManager : MonoBehaviour {
 	void Update () {
 	
 	}
-
-   
 }

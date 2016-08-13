@@ -10,18 +10,28 @@ public class Spectator : MonoBehaviour {
     public StatBar statBar;
     public SpriteRenderer emotionRenderer;
     public Sprite[] emotions;
+    bool fullReset = false;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
-	
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
+    }
 
-	}
+    // Update is called once per frame
+    void Update ()
+    {
+        if (fullReset)
+        {
+            if (statBar.GetFillamount() < 0.94f)
+            {
+                statBar.TempChangeBar(0.05f);
+            }
+            else
+            {
+                fullReset = false;
+            }
+        }
+    }
 
     public void Feelings(int _demonstration)
     {
@@ -45,7 +55,8 @@ public class Spectator : MonoBehaviour {
 
         if ((int)Mood.silly == _demonstration) //Silliness.
         {
-            statBar.ChangeBar(0.05f);
+            fullReset = true;
+            //statBar.ChangeBar(0.05f);
             emotionRenderer.sprite = emotions[0];
         }
     }
