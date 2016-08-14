@@ -6,6 +6,7 @@ public class Spotlight : MonoBehaviour
     Light lightObject;
     private Vector3 target;
     public float speed = 0.05f;
+    public StatBar powerBar;
 
     // Use this for initialization
     void Start ()

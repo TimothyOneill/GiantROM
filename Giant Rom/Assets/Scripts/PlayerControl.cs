@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class PlayerControl : MonoBehaviour
     private bool resetCamera;
     public StatBar powerBar;
     public GameObject playerHUD;
+    public Image screenRenderer;
 
     // Use this for initialization
     void Start()
@@ -28,7 +30,7 @@ public class PlayerControl : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
-        powerBar.ChangeBar(0.0005f);
+        //powerBar.ChangeBar(0.0005f);
     }
 
     // Update is called once per frame
@@ -104,6 +106,8 @@ public class PlayerControl : MonoBehaviour
         //comedic timing.
         yield return new WaitForSeconds(audioClip.length + 0.5f);
         GameManager.gameManager.SetDemonstration(3);
+        screenRenderer.enabled = false;
+
         playerHUD.SetActive(true);
         while (mainCamera.orthographicSize < cameraDefaultSize)
         {
@@ -113,5 +117,11 @@ public class PlayerControl : MonoBehaviour
         }
         powerBar.SetFillAmount(0.0f);
         resetCamera = false;
+        screenRenderer.enabled = true;
+
+        yield return new WaitForSeconds(2);
+
+        GameManager.gameManager.SetDemonstration(0);
+
     }
 }

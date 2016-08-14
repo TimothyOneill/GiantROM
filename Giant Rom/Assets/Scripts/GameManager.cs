@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -7,6 +8,11 @@ public class GameManager : MonoBehaviour {
     public Spectator[] spectators;
     public Spotlight spotlight;
     public Screen screen;
+    public int activeDuders;
+    public StatBar powerBar;
+    float cooldown = -0.01f;
+    public Text t;
+    public Text instructions;
 
     void Awake()
     {
@@ -26,7 +32,9 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-
+        activeDuders = 6;
+        StartCoroutine("Timer");
+        SetDemonstration(0);
     }
 
     // Update is called once per frame
@@ -35,19 +43,16 @@ public class GameManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             SetDemonstration(0);
-            screen.ChangeScreen("Wrasslin", "Assets/Textures/roman_reigns.jpg", "Materials/roman_reigns");
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             SetDemonstration(1);
-            screen.ChangeScreen("Jeff Gerstmann", "Assets/Textures/jeff_gerst.jpg", "Materials/jeff_gerst");
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             SetDemonstration(2);
-            screen.ChangeScreen("Mario Party", "Assets/Textures/mario_party.jpg", "Materials/mario_party");
         }
 
         //Set new target for spotlight
@@ -58,20 +63,71 @@ public class GameManager : MonoBehaviour {
         }
 
         //Check if the player is in the spotlight if not drop approval.
-        if (!spotlight.InSpotLight(GameObject.Find("Dan").transform.position))
+        if (spotlight.InSpotLight(GameObject.Find("Dan").transform.position))
         {
-            foreach (Spectator s in spectators)
-            {
-                s.CantSee();
-            }
+            powerBar.ChangeBar(0.001f);
+        }
+        else
+        {
+            powerBar.ChangeBar(0);
+        }
+
+        cooldown -= 0.01f;
+
+        if(cooldown < 0)
+        {
+            t.text = "";
+        }
+
+        if(powerBar.GetFillamount() == 1)
+        {
+            instructions.text = "PRESS 4";
+        }
+        else
+        {
+            instructions.text = "";
         }
     }
 
     public void SetDemonstration(int _demonstration)
     {
-        foreach (Spectator s in spectators)
+        if(cooldown < 0)
         {
-            s.Feelings(_demonstration);
+            foreach (Spectator s in spectators)
+            {
+                s.Feelings(_demonstration);
+            }
+
+            screen.ChangeScreen(_demonstration);
+
+            cooldown = 0.5f;
         }
+        else
+        {
+            t.text = "COOLDOWN";
+        }
+       
+        
+    }
+
+    IEnumerator Timer()
+    {
+        Debug.Log("Timer Started");
+        yield return new WaitForSeconds(60);
+        EndGame();
+    }
+
+    public void EndGame()
+    {
+        if(activeDuders == 6)
+        {
+            activeDuders = 5;
+        }
+
+        else if(activeDuders == 0)
+        {
+            activeDuders = 1;
+        }
+        Application.LoadLevel("EndScreen");
     }
 }

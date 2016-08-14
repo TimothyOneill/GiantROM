@@ -18,7 +18,7 @@ public class EndManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        SetReview(score);
+        SetReview(GameManager.gameManager.activeDuders);
     }
 
     // Update is called once per frame

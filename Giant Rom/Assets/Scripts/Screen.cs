@@ -5,6 +5,10 @@ using UnityEngine.UI;
 public class Screen : MonoBehaviour
 {
     public Text theme;
+    public Sprite[] sprites;
+    public string[] titles;
+    public Image screen;
+    public Text title;
 
     // Use this for initialization
     void Start ()
@@ -16,7 +20,13 @@ public class Screen : MonoBehaviour
     {
     }
 
-    public bool ChangeScreen(string themeText, string texfilePath, string matfilePath)
+    public void ChangeScreen(int demo)
+    {
+        //title.text = titles[demo];
+        screen.sprite = sprites[demo];
+    }
+
+    /*public bool ChangeScreen(string themeText, string texfilePath, string matfilePath)
     {
         if (System.IO.File.Exists(texfilePath))
         {
@@ -34,5 +44,5 @@ public class Screen : MonoBehaviour
             return true;
         }
         return false;
-    }
+    }*/
 }
